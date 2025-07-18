@@ -1,4 +1,4 @@
-# ai_chatbot_grok
+# ai_chatbot_gemini
 
 A new Flutter project.
 
