@@ -1,4 +1,4 @@
-import 'package:ai_chatbot_grok/home_screen.dart';
+import 'package:ai_chatbot_grok/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 5),(){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>HomeScreen()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>OnboardingScreen()));
     });
   }
 
@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                    image: AssetImage('assets/images/.png',))
+                    image: AssetImage('assets/images/gemini.png',))
               ),
             ),
           )

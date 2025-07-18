@@ -45,13 +45,14 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       });
 
-
-
-
       _controller.clear();
     }
     catch(e){
-      print("Error : $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.red,
+            content: Text(e.toString())),
+      );
     }
   }
 
