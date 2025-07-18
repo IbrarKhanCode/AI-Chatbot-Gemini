@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                    image: AssetImage('assets/images/grok icon.png',))
+                    image: AssetImage('assets/images/.png',))
               ),
             ),
           )

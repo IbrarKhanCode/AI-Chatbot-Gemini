@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   final TextEditingController _controller = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
   bool _isLoading = false;
   final List<Message> _messages = [];
 
@@ -36,6 +37,17 @@ class _HomeScreenState extends State<HomeScreen> {
         _isLoading = false;
       });
 
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent,
+          duration: Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      });
+
+
+
+
       _controller.clear();
     }
     catch(e){
@@ -49,19 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.black,
       body: Column(
         children: [
-          if(_isLoading) Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: SizedBox(
-              height: 50,
-              width: 50,
-              child: CircularProgressIndicator(
-                strokeWidth: 2.5,
-                color: Colors.blue,
-              ),
-            ),
-          ),
            Expanded(
             child: ListView.builder(
+              controller: _scrollController,
                 itemCount: _messages.length,
                 itemBuilder: (context,index){
                   final message = _messages[index];
@@ -93,6 +95,18 @@ class _HomeScreenState extends State<HomeScreen> {
                    );
                 }),
           ),
+          if(_isLoading)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: SizedBox(
+                height: 100,
+                width: 100,
+                child: CircularProgressIndicator(
+                  strokeWidth: 5,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Container(
@@ -116,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       cursorColor: Colors.blue,
                       controller: _controller,
                       decoration: InputDecoration(
-                        hintText: 'Enter your message',
+                        hintText: 'Ask Gemini',
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
