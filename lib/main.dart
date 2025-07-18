@@ -1,4 +1,4 @@
-import 'package:ai_chatbot_grok/splash_screen.dart';
+import 'package:ai_chatbot_gemini/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 

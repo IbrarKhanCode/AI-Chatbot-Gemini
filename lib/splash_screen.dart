@@ -1,4 +1,4 @@
-import 'package:ai_chatbot_grok/onboarding_screen.dart';
+import 'package:ai_chatbot_gemini/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {

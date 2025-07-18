@@ -1,4 +1,4 @@
-import 'package:ai_chatbot_grok/home_screen.dart';
+import 'package:ai_chatbot_gemini/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {

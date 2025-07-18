@@ -1,4 +1,4 @@
-import 'package:ai_chatbot_grok/message.dart';
+import 'package:ai_chatbot_gemini/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
