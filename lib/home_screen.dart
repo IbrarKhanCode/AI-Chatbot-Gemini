@@ -1,5 +1,8 @@
 import 'package:ai_chatbot_grok/message.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,12 +14,34 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   final TextEditingController _controller = TextEditingController();
-  final List<Message> _messages = [
-    Message(text: 'Hi', isUser: true),
-    Message(text: 'Hello What\'s up ?', isUser: false),
-    Message(text: 'Great and you ?', isUser: true),
-    Message(text: 'I\' am excellent', isUser: false),
-  ];
+  bool _isLoading = false;
+  final List<Message> _messages = [];
+
+  callGeminiModel() async{
+    try{
+      if(_controller.text.isNotEmpty){
+        setState(() {
+          _messages.add(Message(text: _controller.text, isUser: true));
+          _isLoading = true;
+        });
+      }
+
+      final model = GenerativeModel(model: 'gemini-2.0-flash', apiKey: dotenv.env['GOOGLE_API_KEY']!);
+      final prompt = _controller.text.trim();
+      final content = [Content.text(prompt)];
+      final response = await model.generateContent(content);
+
+      setState(() {
+        _messages.add(Message(text: response.text!, isUser: false));
+        _isLoading = false;
+      });
+
+      _controller.clear();
+    }
+    catch(e){
+      print("Error : $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +49,18 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.black,
       body: Column(
         children: [
-          Expanded(
+          if(_isLoading) Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: SizedBox(
+              height: 50,
+              width: 50,
+              child: CircularProgressIndicator(
+                strokeWidth: 2.5,
+                color: Colors.blue,
+              ),
+            ),
+          ),
+           Expanded(
             child: ListView.builder(
                 itemCount: _messages.length,
                 itemBuilder: (context,index){
@@ -76,6 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Expanded(
                     child: TextField(
+                      style: TextStyle(color: Colors.white),
                       cursorColor: Colors.blue,
                       controller: _controller,
                       decoration: InputDecoration(
@@ -89,9 +126,22 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  IconButton(
-                      onPressed: (){},
-                      icon: Icon(Icons.send,color: Colors.blue,))
+                  _isLoading ?
+                 Padding(
+                   padding: const EdgeInsets.symmetric(horizontal: 15),
+                   child: SizedBox(
+                     height: 24,
+                     width: 24,
+                     child: CircularProgressIndicator(
+                       strokeWidth: 2.5,
+                       color: Colors.blue,
+                     ),
+                   ),
+                 )
+                      : IconButton(
+                      onPressed: callGeminiModel,
+                      icon: Icon(Icons.send,color: Colors.blue,)
+                  ),
                 ],
               ),
             ),
