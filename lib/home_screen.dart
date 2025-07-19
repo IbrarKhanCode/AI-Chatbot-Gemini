@@ -2,7 +2,7 @@ import 'package:ai_chatbot_gemini/message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
-
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,7 +16,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   bool _isLoading = false;
-  final List<Message> _messages = [];
+
+   final List<Message> _messages = [];
 
   callGeminiModel() async{
     try{
@@ -87,27 +88,19 @@ class _HomeScreenState extends State<HomeScreen> {
                              bottomLeft: Radius.circular(20),
                          ),
                          ),
-                         child: Text(message.text,style: TextStyle(
+                         child: message.isUser ? Text(
+                           message.text,style: TextStyle(
                            color: message.isUser ? Colors.white : Colors.black,fontSize: 14,
                            fontWeight: FontWeight.w500
-                         ),),
+                         ),
+                         )
+                             : MarkdownBody(data: message.text),
+
                        ),
                      ),
                    );
                 }),
           ),
-          if(_isLoading)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: SizedBox(
-                height: 100,
-                width: 100,
-                child: CircularProgressIndicator(
-                  strokeWidth: 5,
-                  color: Colors.white,
-                ),
-              ),
-            ),
           Padding(
             padding: const EdgeInsets.all(20),
             child: Container(
@@ -160,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-          )
+          ),
         ],
       )
     );
