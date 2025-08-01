@@ -1,16 +1,36 @@
-# ai_chatbot_gemini
+# 🤖 AI Chatbot – Gemini Powered (Flutter)
 
-A new Flutter project.
+A lightweight, responsive AI chatbot app built using **Flutter** and **Dart**, integrated with **Google's Gemini API** for real-time, natural language conversations.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+- 🤖 Conversational AI using Google Gemini API
+- 💬 Real-time chat interface with smooth UX
+- 🔄 Automatic scrolling to latest messages using `ScrollController`
+- ✍️ Clean user input handling with `TextEditingController`
+- ⚡ Dynamically updating UI on message send and receive
+- 📱 Fully responsive layout across devices
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Tech Stack
+
+- **Flutter & Dart**
+- **Google Gemini API**
+- **HTTP package** for API requests
+
+---
+
+## 🧪 Key Implementation Highlights
+
+- Integrated Gemini API via HTTP requests for AI responses
+- Used `TextEditingController` for clean message input capture
+- Managed scroll with `ScrollController` to always keep the latest message visible
+- Responsive layout built with `Column`, `Expanded`, `ListView`, and `TextField`
+- Minimal, maintainable structure — no architecture libraries
+
+---
+
+
